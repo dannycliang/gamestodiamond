@@ -21,10 +21,13 @@ def index():
             index += 1
     elif abridged_form.username.data and abridged_form.validate_on_submit():
         info = get_info(abridged_form.username.data)
-        sim = Player(info[0], int(info[3]), 40 - int(info[3]), info[1], info[1] >= 100, 0, 0)
-        goal = abridged_form.goal.data
-        index = 0
-        while index < 1000:
-            games += sim.Ranked_calculate(abridged_form.goal.data, abridged_form.winrate.data)
-            index += 1
+        if len(info) > 2:
+            sim = Player(info[0], int(info[3]), 40 - int(info[3]), info[1], info[1] >= 100, 0, 0)
+            goal = abridged_form.goal.data
+            index = 0
+            while index < 1000:
+                games += sim.Ranked_calculate(abridged_form.goal.data, abridged_form.winrate.data)
+                index += 1
+        else:
+            games = 2000 * 1000
     return render_template('login.html', games=games / 1000, fform=full_form, aform=abridged_form, goal=goal)
