@@ -141,14 +141,14 @@
     .ManualForm {
       position: relative;
       display: inline-flex;
-      float: left;
+      float: right;
       top: 20%;
     }
 
     .FastForm {
       position: relative;
       display: inline-flex;
-      float: right;
+      float: left;
       top: 30%;
     }
 
@@ -157,7 +157,7 @@
       display: inline;
       top: 15%;
       width: 15em;
-      float: right;
+      float: left;
     }
 
     .qui {
@@ -165,7 +165,7 @@
       display: inline;
       top: 15%;
       width: 15em;
-      float: left;
+      float: right;
     }
 
     #result {
@@ -224,7 +224,6 @@
           <h5 id = "Instructions"> Hover for format </h5>
           <p id = "QuickDesc"> Just enter your summoner name, goal rank, and winrate. </p>
         </div>
-
       <div class = "Fastform" id ="FastForm" style="display:none;">
         {% block form %}{% endblock %}
       </div>
@@ -453,7 +452,7 @@
 $(document).ready(function(e) {
   $( "#Instructions" ).hover(function() {
     $( "#QuickDesc" ).text("Summoner Name: Spaces and caps are irrelevant \n\n Goal Rank: Rank then Roman Numeral or Number (e.g. Diamond V or Diamond 5) \n\n Winrate: Integer between 0 and 100. Defaults to your current winrate") },
-    function() {$( "#QuickDesc" ).text("Just enter your summoner name and goal rank. By default, it will use your current solo winrate, although you can override this by entering your own desired winrate")}
+    function() {$( "#QuickDesc" ).text("Just enter your summoner name, goal rank, and winrate")}
   )
 });
 
@@ -510,6 +509,16 @@ if ({{ games }} < 1000) {
 $("#Home").click(function() {
   window.location.replace("http://dannyliang.com");
 });
+
+$("#Quick").hover(function() {
+  $("#QuickDesc").toggle(100),
+    $("#Instructions").toggle(100);
+})
+
+$("#Manual").hover(function() {
+  $("#ManDesc").toggle(100),
+    $("#InstructionsM").toggle(100);
+})
 
 $("#About").click(function() {
     $(".qui").toggle(500),
