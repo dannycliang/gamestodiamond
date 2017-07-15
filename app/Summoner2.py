@@ -1,6 +1,6 @@
 from riotwatcher import RiotWatcher
 
-w = RiotWatcher('RGAPI-312e9565-4079-4926-9da7-6f6a791cd893')
+w = RiotWatcher('RGAPI-559eb27c-ba76-41f4-9bfc-1b85e2d90d1b')
 
 
 
@@ -15,6 +15,8 @@ def get_info(username):
             LP = my_ranked_stats[stat][0][u'entries'][0][u'leaguePoints']
             winrate = round((my_ranked_stats[stat][0][u'entries'][0][u'wins'] * 100 + 0.0)/ (my_ranked_stats[stat][0][u'entries'][0][u'wins'] + my_ranked_stats[stat][0][u'entries'][0][u'losses']), 2)
             result = [rank + " " + division, LP, winrate, 20 + (winrate - 50) / 2]
+        for item in result:
+            print(item)
         return result
     except:
         return ["No summoner by that name"]
