@@ -123,6 +123,7 @@
     }
 
     .title {
+      display: none;
       position: absolute;
       top: 1em;
       left: 3em;
@@ -130,7 +131,7 @@
 
     .header {
       position: absolute;
-      display: flex;
+      display: none;
       top: 1em;
       right: 0.5em;
       width: 30em;
@@ -142,7 +143,7 @@
       display: inline-flex;
       position: relative;
       float: left;
-      top: 40%;
+      top: 30%;
     }
 
     .FastForm {
@@ -153,7 +154,7 @@
     }
 
     .man {
-      display: inline-block;
+      display: none;
       position: relative;
       top: 40%;
       width: 20em;
@@ -162,7 +163,7 @@
     }
 
     .qui {
-      display: inline-block;
+      display: none;
       position: relative;
       top: 40%;
       width: 20em;
@@ -450,6 +451,14 @@
             });
         });
 });
+
+$(document).ready(function(e) {
+  $( ".title" ).fadeIn(1000),
+    $( ".header" ).fadeIn(1000, function() {
+      $( ".qui" ).fadeIn(1000),
+      $( ".man" ).fadeIn(1000);
+    })
+  })
 
 $(document).ready(function(e) {
   $( "#Instructions" ).hover(function() {
