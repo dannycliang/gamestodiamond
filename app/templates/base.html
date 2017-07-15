@@ -139,33 +139,35 @@
 
 
     .ManualForm {
-      position: relative;
       display: inline-flex;
-      float: right;
-      top: 20%;
+      position: relative;
+      float: left;
+      top: 40%;
     }
 
     .FastForm {
-      position: relative;
       display: inline-flex;
-      float: left;
-      top: 30%;
+      position: relative;
+      float: right;
+      top: 40%;
     }
 
     .man {
+      display: inline-block;
       position: relative;
-      display: inline;
-      top: 15%;
-      width: 15em;
-      float: left;
+      top: 40%;
+      width: 20em;
+      left: 50%;
+      transform: translate(-50%, -50%)
     }
 
     .qui {
+      display: inline-block;
       position: relative;
-      display: inline;
-      top: 15%;
-      width: 15em;
-      float: right;
+      top: 40%;
+      width: 20em;
+      left: 50%;
+      transform: translate(-50%, -50%)
     }
 
     #result {
@@ -426,13 +428,13 @@
   $(document).ready(function(e) {
     $( "#Quick" ).click(function qui() {
       $("#result").fadeOut(300),
-        $("#Start").fadeOut(0),
+        $(".qui").fadeOut(0),
          $("#FastForm").fadeIn(500)
       });
     });
     $(document).ready(function(e) {
       $( "#Manual" ).click(function man() {
-        $("#Start").fadeOut(0),
+        $(".man").fadeOut(0),
           $("#ManualForm").fadeIn(500),
           $("#result").fadeOut(300)
         });
@@ -510,15 +512,7 @@ $("#Home").click(function() {
   window.location.replace("http://dannyliang.com");
 });
 
-$("#Quick").hover(function() {
-  $("#QuickDesc").toggle(100),
-    $("#Instructions").toggle(100);
-})
 
-$("#Manual").hover(function() {
-  $("#ManDesc").toggle(100),
-    $("#InstructionsM").toggle(100);
-})
 
 $("#About").click(function() {
     $(".qui").toggle(500),
