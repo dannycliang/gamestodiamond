@@ -15,7 +15,11 @@
       font-family: "Josefin Sans";
       font-size: 1.5em;
       text-align: center;
-      white-space: pre-wrap
+      white-space: pre-wrap;
+      -moz-transition: all .5s ease-in;
+      -o-transition: all .5s ease-in;
+      -webkit-transition: all .5s ease-in;
+      transition: all .5s ease-in;
     }
 
 
@@ -66,6 +70,15 @@
       font-size: 1.5em;
       text-align: center;
       font-weight: lighter;
+      cursor: pointer;
+      -moz-transition: all .2s ease-in;
+      -o-transition: all .2s ease-in;
+      -webkit-transition: all .2s ease-in;
+      transition: all .2s ease-in;
+    }
+
+    h5:hover {
+      color: white;
     }
 
     h6 {
@@ -211,7 +224,7 @@
     <div id = "AboutContainer">
       <p id = "AboutText" style="display:none;"> This is a (by no means exact) tool for you to calculate how many games it'll take to reach your desired rank. It works by running 1000 simulations of your climb at the specified winrate, and averaging the number of games it takes to reach that rank. <br><br> Feel free to ask any questions and report any bugs to dclba726@gmail.com. <br> <br> Credits: <br> <br> <a href="https://icons8.com">Icon pack by Icons8</a> <br> <br>
       <a href="https://www.flickr.com/photos/teorema-graphics/17301201523"> Background by Growing </a> <br> <br>
-      Games to Challenger isn’t endorsed by Riot Games and doesn’t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc. </p>
+      Games to Diamond isn’t endorsed by Riot Games and doesn’t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc. </p>
     </div>
     <div id = "result">
       {% if games %}
@@ -224,7 +237,7 @@
     </div>
         <div class = "qui">
           <h4 id = "Quick" onmouseover="javascript:imageChange('leftimage')" onmouseout="javascript:imageRevert('leftimage')"> Quick Mode </h4>
-          <h5 id = "Instructions"> Hover for format </h5>
+          <h5 id = "Instructions"> Click for format </h5>
           <p id = "QuickDesc"> Just enter your summoner name, goal rank, and winrate. </p>
         </div>
       <div class = "Fastform" id ="FastForm" style="display:none;">
@@ -244,7 +257,7 @@
       </div>
       <div class = "man">
         <h4 id = "Manual" onmouseover="javascript:imageChange()" onmouseout="javascript:imageRevert()"> Manual Mode </h4>
-          <h5 id = "InstructionsM"> Hover for format </h5>
+          <h5 id = "InstructionsM"> Click for format </h5>
           <p id = "ManDesc"> Manually enter all your desired parameters. Use instead of quick mode for hypotheticals, more granular control, or anything else that it doesn't cover </p>
       </div>
       <div class = "ManualForm" id = "ManualForm" style = "display: none;">
@@ -453,26 +466,23 @@
 });
 
 $(document).ready(function(e) {
-  $( ".title" ).fadeIn(1000),
-    $( ".header" ).fadeIn(1000, function() {
-      $( ".qui" ).fadeIn(1000),
-      $( ".man" ).fadeIn(1000);
+  $( ".title" ).fadeIn(700),
+    $( ".header" ).fadeIn(700, function() {
+      $( ".qui" ).fadeIn(700),
+      $( ".man" ).fadeIn(700);
     })
   })
 
 $(document).ready(function(e) {
-  $( "#Instructions" ).hover(function() {
+  $( "#Instructions" ).click(function() {
     $( "#QuickDesc" ).text("Summoner Name: Spaces and caps are irrelevant \n\n Goal Rank: Rank then Roman Numeral or Number (e.g. Diamond V or Diamond 5) \n\n Winrate: Integer between 0 and 100. Defaults to your current winrate") },
-    function() {$( "#QuickDesc" ).text("Just enter your summoner name, goal rank, and winrate")}
   )
 });
 
 $(document).ready(function(e) {
-  $( "#InstructionsM" ).hover(function() {
+  $( "#InstructionsM" ).click(function() {
     $("#ManDesc").css("font-size", "1em"),
-    $( "#ManDesc" ).text("Starting Rank: Rank then Roman Numeral or Number (e.g. Diamond V or Diamond 5) \n\n Current LP Gain: Integer, usually between 14 and 26 \n\n Current LP Loss: Integer, usually between 14 and 26 \n\n Current LP: Integer between 0 and 100 \n\n Wins in series: Number of wins if you're in a series. Enter 0 otherwise. \n\n Losses in series: Number of losses if you're in a series. Enter 0 otherwise. \n\n Goal Rank: Rank then Roman Numeral or Number (e.g. Diamond V or Diamond 5) \n\n Winrate: Integer between 0 and 100.") },
-    function() {$("#ManDesc").css("font-size", "1.5em"), $( "#ManDesc" ).text("Manually enter all your desired parameters. Use instead of quick mode for hypotheticals, more granular control, or anything else that it doesn't cover")}
-  )
+    $( "#ManDesc" ).text("Starting Rank: Rank then Roman Numeral or Number (e.g. Diamond V or Diamond 5) \n\n Current LP Gain: Integer, usually between 14 and 26 \n\n Current LP Loss: Integer, usually between 14 and 26 \n\n Current LP: Integer between 0 and 100 \n\n Wins in series: Number of wins if you're in a series. Enter 0 otherwise. \n\n Losses in series: Number of losses if you're in a series. Enter 0 otherwise. \n\n Goal Rank: Rank then Roman Numeral or Number (e.g. Diamond V or Diamond 5) \n\n Winrate: Integer between 0 and 100.") })
 });
 
 
