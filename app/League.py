@@ -1,5 +1,5 @@
 from random import *
-
+# Aliases that allow more flexibility in user input, as well as recordings of some details about the game
 Ranks = {'V': 5, 'IV': 4, 'III': 3, 'II': 2, 'I': 1, '5': 5, '4': 4, '3': 3, '2': 2, '1': 1, 'v': 5, 'iv': 4, 'iii': 3, 'ii': 2, 'i': 1}
 reverse_Ranks = {5: 'V', 4: 'IV', 3: 'III', 2: 'II', 1: 'I'}
 tiers = {'bronze': 'Silver V', 'silver': 'Gold V', 'gold': 'Platinum V', 'platinum': 'Diamond V', 'diamond': 'Master I'}
@@ -20,6 +20,7 @@ class Player:
     Buffer = 3
     Balance = 0
 
+    # Initialize a player based on the given information
     def __init__(self, Rank, Base_Gain = 20, Base_Loss = 20, Current_LP = 0, In_Series = False, Series_Wins = 0, Series_Losses = 0):
         self.Current_Rank = Rank
         self.Current_Gain = Base_Gain
@@ -33,11 +34,13 @@ class Player:
         if self.Current_Tier == 5:
             self.Buffer = 20
 
+    # Runs the simulations
     def Ranked_calculate(self, Goal_Rank, Winrate):
         Simulate_Player = Player(self.Current_Rank, self.Current_Gain, self.Current_Loss, self.Current_LP, self.In_Series, self.Series_Wins, self.Series_Losses)
         winning = Winrate
         games = 0
         goal_rank = Goal_Rank.split()[0][:1].upper() + Goal_Rank.split()[0][1:].lower() + " " + homogenize_divison[Goal_Rank.split()[1].upper()]
+        # Run simulations while the player has not reached there goals, with a limit of 1000 games per simulation
         while Simulate_Player.Current_Rank != goal_rank and games < 1000:
             result = randint(1, 80)
             if (winning > result):
@@ -48,7 +51,9 @@ class Player:
             print(str(Simulate_Player.Current_Rank) + " " + str(Simulate_Player.Current_LP))
         return games
 
+    # Called in the event of a win during the simulation
     def win(self):
+        # Add points to user, with some added random variation similar to that of the game
         new_LP = self.Current_LP + self.Current_Gain + randint(-2, 2)
         self.modify_gain(True)
         if self.In_Series:
@@ -59,7 +64,7 @@ class Player:
         else:
             self.Current_LP = new_LP
 
-
+    # Called in the event of a series win during the simulation
     def series_win(self):
         if self.Current_Tier == 1:
             new_wins = (self.Series_Wins + 1) % 3
@@ -84,6 +89,7 @@ class Player:
                 self.Series_Wins = new_wins
                 self.Current_LP += self.Current_Gain
 
+    # Called in the event of a series loss during the simulation
     def series_loss(self):
         if self.Current_Tier == 1:
             new_losses = (self.Series_Losses + 1) % 3
@@ -100,7 +106,7 @@ class Player:
             else:
                 self.Series_Losses = new_losses
 
-
+    # Called in the event of that the player has reached the next rank during the simulation
     def add_Rank(self):
         if self.Current_Tier == 1:
             self.Current_Tier = 5
@@ -111,9 +117,10 @@ class Player:
             self.Buffer = 3
             self.Current_Rank = self.Current_Rank.split(' ')[0] + ' ' + reverse_Ranks[self.Current_Tier]
 
-
+    # Called in the event of that the player has lost rank during the simulation
     def lose_Rank(self):
         if self.Current_Tier == 5:
+            # A player cannot be demoted from bronze, so we do not alter their data if they are bronze rank
             if "ronze" in self.Current_Rank:
                 return
             self.Current_Tier = 1
@@ -127,7 +134,7 @@ class Player:
             self.Current_LP = 75
             self.Current_Rank = self.Current_Rank.split(' ')[0] + ' ' + reverse_Ranks[self.Current_Tier]
 
-
+    # Called in the event of that the player has lost during the simulation
     def lose(self, winrate):
         new_LP = self.Current_LP - (self.Current_Loss + randint(-2, 2))
         self.modify_gain(False)
@@ -146,6 +153,7 @@ class Player:
             self.Current_LP = new_LP
         return winrate
 
+    # Introduce the variation in gains from winning present in the game
     def modify_gain(self, Win):
         if Win:
             new_balance = self.Balance + 1

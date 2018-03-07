@@ -1,10 +1,12 @@
+# An API that allows me to query a user's gameplay data
 from riotwatcher import RiotWatcher
 
-w = RiotWatcher('RGAPI-dedb6ae8-788a-41ce-be02-d6c3fdc667c6')
+# My API key
+w = RiotWatcher("RGAPI-c7263f5c-424f-4c7d-9e8f-321db7bd5185")
 
 
 
-
+""" Function that queries the RiotWatcher API for the relevant details of the user based on its username. Parses and cleans the response and returns it for use"""
 def get_info(username):
     try:
         user = w.get_summoner(name=username)

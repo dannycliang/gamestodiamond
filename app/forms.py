@@ -2,7 +2,7 @@ from flask_wtf import Form
 from wtforms import StringField, BooleanField, IntegerField, SubmitField, ValidationError
 from wtforms.validators import DataRequired
 
-
+# Validation for each of the fields a user may submit for the manual mode, based on the requirements from the game
 def cg_validate(form, field):
     if not isinstance(field.data, int):
         raise ValidationError("LP gain must be an integer")
